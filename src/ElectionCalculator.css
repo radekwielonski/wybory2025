@@ -106,6 +106,37 @@
   color: #234;
 }
 
+.sort-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-switch button {
+  background: #e3eafc;
+  border: 1px solid #1976d2;
+  color: #1976d2;
+  padding: 0.3em 1em;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  min-width: 70px;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sort-switch button.active {
+  background: #1976d2;
+  color: #fff;
+}
+
+.sort-switch button:not(.active):hover {
+  background: #c7d7f5;
+}
+
 @media (max-width: 600px) {
   .election-calculator {
     padding: 8px;

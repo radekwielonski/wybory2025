@@ -7,6 +7,7 @@ const ElectionCalculator = () => {
   const [count, setCount] = useState(30);
   const [results, setResults] = useState({ districts: {}, total: 0 });
   const [selectedCandidate, setSelectedCandidate] = useState('nawrocki');
+  const [sortBy, setSortBy] = useState('percentage');
 
   const calculateResults = (percentage, count) => {
     const outputDict = {};
@@ -81,6 +82,23 @@ const ElectionCalculator = () => {
             min="0"
           />
         </div>
+        <div className="input-group sort-switch">
+          <label>Sortuj wyniki:</label>
+          <button
+            type="button"
+            className={sortBy === 'percentage' ? 'active' : ''}
+            onClick={() => setSortBy('percentage')}
+          >
+            %
+          </button>
+          <button
+            type="button"
+            className={sortBy === 'count' ? 'active' : ''}
+            onClick={() => setSortBy('count')}
+          >
+            głosy
+          </button>
+        </div>
       </div>
 
       <div className="results">
@@ -91,7 +109,7 @@ const ElectionCalculator = () => {
         <p>Łączna różnica w głosach: {results.total.toFixed(1)}</p>
         <div className="districts">
           {Object.entries(results.districts)
-            .sort(([, a], [, b]) => b.procenty - a.procenty)
+            .sort(([, a], [, b]) => sortBy === 'percentage' ? b.procenty - a.procenty : b.liczba - a.liczba)
             .map(([district, data]) => (
             <div key={district} className="district">
               <h3>Nr komisji: {district}</h3>
