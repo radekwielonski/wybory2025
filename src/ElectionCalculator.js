@@ -4,9 +4,9 @@ import './ElectionCalculator.css';
 
 const ElectionCalculator = () => {
   const [percentage, setPercentage] = useState(20);
-  const [count, setCount] = useState(50);
+  const [count, setCount] = useState(30);
   const [results, setResults] = useState({ districts: {}, total: 0 });
-  const [selectedCandidate, setSelectedCandidate] = useState('trzaskowski');
+  const [selectedCandidate, setSelectedCandidate] = useState('nawrocki');
 
   const calculateResults = (percentage, count) => {
     const outputDict = {};
@@ -39,6 +39,9 @@ const ElectionCalculator = () => {
 
   return (
     <div className="election-calculator">
+      <p className="description">
+        Kalkulator ma na celu pokazanie komisji wyborczych, w których głosy z pierwszych tur odbiegają od głosów z drugich tur.
+      </p>
       <div className="candidates">
         <div 
           className={`candidate ${selectedCandidate === 'trzaskowski' ? 'selected' : ''}`}
@@ -51,7 +54,7 @@ const ElectionCalculator = () => {
           className={`candidate ${selectedCandidate === 'nawrocki' ? 'selected' : ''}`}
           onClick={() => setSelectedCandidate('nawrocki')}
         >
-          <img src="/nawrocki.jpg" alt="Karol Nawrocki" />
+          <img src="/nawrocki.webp" alt="Karol Nawrocki" />
           <h3>Karol Nawrocki</h3>
         </div>
       </div>
