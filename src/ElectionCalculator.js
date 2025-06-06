@@ -42,7 +42,9 @@ const ElectionCalculator = () => {
     <div className="election-calculator">
       <div className="election-calculator">
         <p className="description">
-          Kalkulator ma na celu pokazanie komisji wyborczych, w których głosy z pierwszych tur odbiegają od głosów z drugich tur.
+          <b>Cel kalkulatora:</b> Pokazuje, jak wyniki kandydatów w drugiej turze różnią się od tego, czego można się było spodziewać na podstawie sondaży.
+          <br />
+          <b>Metodologia:</b> Do wyników kandydatów z pierwszej tury dodałem przewidywane przepływy głosów od pozostałych kandydatów (na podstawie sondaży). Otrzymany w ten sposób wynik porównałem z rzeczywistym wynikiem drugiej tury.
         </p>
         <div className="candidates">
           <div 
@@ -103,7 +105,7 @@ const ElectionCalculator = () => {
         </div>
 
         <div className="results">
-          <h2>Różnica w poparciu między pierwszą a drugą turą</h2>
+          <h2>Różnica w poparciu między pierwszą a drugą turą z podziałem na komisje</h2>
           <div className="disclaimer">
             <p><strong>Uwaga:</strong> Obliczenia uwzględniają głosy z pierwszej tury, które zostały rozdzielone między dwóch kandydatów w drugiej turze na podstawie sondaży. Stąd widać liczby niecałkowite.</p>
           </div>
