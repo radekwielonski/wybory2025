@@ -30,8 +30,8 @@ const ElectionCalculator = () => {
       }
     }
 
-    const suma = Object.values(outputDict).reduce((acc, curr) => acc + curr.liczba, 0);
-    return { districts: outputDict, total: suma };
+    const total = Object.values(outputDict).reduce((acc, curr) => acc + curr.count, 0);
+    return { districts: outputDict, total };
   };
 
   useEffect(() => {
@@ -48,14 +48,14 @@ const ElectionCalculator = () => {
           <b>Metodologia:</b> Do wyników kandydatów z pierwszej tury dodałem przewidywane przepływy głosów od pozostałych kandydatów (na podstawie sondaży). Otrzymany w ten sposób wynik porównałem z rzeczywistym wynikiem drugiej tury.
         </p>
         <div className="candidates">
-          <div 
+          <div
             className={`candidate ${selectedCandidate === 'trzaskowski' ? 'selected' : ''}`}
             onClick={() => setSelectedCandidate('trzaskowski')}
           >
             <img src={process.env.PUBLIC_URL + '/trzaskowski.jpg'} alt="Rafał Trzaskowski" />
             <h3>Rafał Trzaskowski</h3>
           </div>
-          <div 
+          <div
             className={`candidate ${selectedCandidate === 'nawrocki' ? 'selected' : ''}`}
             onClick={() => setSelectedCandidate('nawrocki')}
           >
@@ -115,16 +115,16 @@ const ElectionCalculator = () => {
             {Object.entries(results.districts)
               .sort(([, a], [, b]) => sortBy === 'percentage' ? b.percentage - a.percentage : b.count - a.count)
               .map(([district, data]) => (
-              <div key={district} className="district">
-                <h3>Nr komisji: {district}</h3>
-                <p>Różnica procentowa: {data.percentage.toFixed(2)}%</p>
-                <p>Różnica w głosach: {data.count.toFixed(1)}</p>
-              </div>
-            ))}
+                <div key={district} className="district">
+                  <h3>Nr komisji: {district}</h3>
+                  <p>Różnica procentowa: {data.percentage.toFixed(2)}%</p>
+                  <p>Różnica w głosach: {data.count.toFixed(1)}</p>
+                </div>
+              ))}
           </div>
         </div>
 
-        <div style={{marginTop: '2em', textAlign: 'center'}}>
+        <div style={{ marginTop: '2em', textAlign: 'center' }}>
           <a href="https://github.com/radekwielonski/wybory2025/blob/main/HOW_I_MADE_INPUT_FILE.md" target="_blank" rel="noopener noreferrer">
             Jak powstał plik wejściowy? (pełny opis)
           </a>
