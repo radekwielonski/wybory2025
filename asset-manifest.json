@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/wybory2025/static/css/main.f6e47ce8.css",
-    "main.js": "/wybory2025/static/js/main.6f41de02.js",
+    "main.js": "/wybory2025/static/js/main.d97ded76.js",
     "static/js/453.ad6eb26e.chunk.js": "/wybory2025/static/js/453.ad6eb26e.chunk.js",
     "index.html": "/wybory2025/index.html",
     "main.f6e47ce8.css.map": "/wybory2025/static/css/main.f6e47ce8.css.map",
-    "main.6f41de02.js.map": "/wybory2025/static/js/main.6f41de02.js.map",
+    "main.d97ded76.js.map": "/wybory2025/static/js/main.d97ded76.js.map",
     "453.ad6eb26e.chunk.js.map": "/wybory2025/static/js/453.ad6eb26e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f6e47ce8.css",
-    "static/js/main.6f41de02.js"
+    "static/js/main.d97ded76.js"
   ]
 }
