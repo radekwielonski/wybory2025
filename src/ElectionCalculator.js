@@ -109,7 +109,7 @@ const ElectionCalculator = () => {
           <div className="disclaimer">
             <p><strong>Uwaga:</strong> Obliczenia uwzględniają głosy z pierwszej tury, które zostały rozdzielone między dwóch kandydatów w drugiej turze na podstawie sondaży. Stąd widać liczby niecałkowite.</p>
           </div>
-          <p>Łączna różnica w głosach: {results.total.toFixed(1)}</p>
+          <p>Łączna różnica w <b>głosach na korzyść kandydata</b>: {results.total.toFixed(1)}</p>
           <div className="districts">
             {Object.entries(results.districts)
               .sort(([, a], [, b]) => sortBy === 'percentage' ? b.procenty - a.procenty : b.liczba - a.liczba)
