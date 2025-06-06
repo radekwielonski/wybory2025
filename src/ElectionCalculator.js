@@ -3,8 +3,8 @@ import wyniki from './wyniki.json';
 import './ElectionCalculator.css';
 
 const ElectionCalculator = () => {
-  const [percentage, setPercentage] = useState(20);
-  const [count, setCount] = useState(30);
+  const [percentage, setPercentage] = useState('20');
+  const [count, setCount] = useState('30');
   const [results, setResults] = useState({ districts: {}, total: 0 });
   const [selectedCandidate, setSelectedCandidate] = useState('nawrocki');
   const [sortBy, setSortBy] = useState('percentage');
@@ -14,6 +14,8 @@ const ElectionCalculator = () => {
     const pierwsza_tura_dict = wyniki.pierwsza_tura;
     const druga_tura_dict = wyniki.druga_tura;
     const kandydat = selectedCandidate;
+    const perc = Number(percentage) || 0;
+    const cnt = Number(count) || 0;
 
     for (const okreg in pierwsza_tura_dict) {
       const p_kandydaci = pierwsza_tura_dict[okreg];
@@ -21,7 +23,7 @@ const ElectionCalculator = () => {
       const roznica_procenty = d_kandydaci[kandydat].procenty - p_kandydaci[kandydat].procenty;
       const roznica_liczba = d_kandydaci[kandydat].liczba - p_kandydaci[kandydat].liczba;
 
-      if (roznica_procenty > percentage && roznica_liczba > count) {
+      if (roznica_procenty > perc && roznica_liczba > cnt) {
         outputDict[okreg] = {
           procenty: roznica_procenty,
           liczba: roznica_liczba,
@@ -70,7 +72,7 @@ const ElectionCalculator = () => {
               type="number"
               id="percentage"
               value={percentage}
-              onChange={(e) => setPercentage(Number(e.target.value))}
+              onChange={(e) => setPercentage(e.target.value)}
               min="0"
               max="100"
             />
@@ -81,7 +83,7 @@ const ElectionCalculator = () => {
               type="number"
               id="count"
               value={count}
-              onChange={(e) => setCount(Number(e.target.value))}
+              onChange={(e) => setCount(e.target.value)}
               min="0"
             />
           </div>
