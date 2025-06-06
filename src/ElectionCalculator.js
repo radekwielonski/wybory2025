@@ -47,14 +47,14 @@ const ElectionCalculator = () => {
           className={`candidate ${selectedCandidate === 'trzaskowski' ? 'selected' : ''}`}
           onClick={() => setSelectedCandidate('trzaskowski')}
         >
-          <img src="/trzaskowski.jpg" alt="Rafał Trzaskowski" />
+          <img src={process.env.PUBLIC_URL + '/trzaskowski.jpg'} alt="Rafał Trzaskowski" />
           <h3>Rafał Trzaskowski</h3>
         </div>
         <div 
           className={`candidate ${selectedCandidate === 'nawrocki' ? 'selected' : ''}`}
           onClick={() => setSelectedCandidate('nawrocki')}
         >
-          <img src="/nawrocki.webp" alt="Karol Nawrocki" />
+          <img src={process.env.PUBLIC_URL + '/nawrocki.webp'} alt="Karol Nawrocki" />
           <h3>Karol Nawrocki</h3>
         </div>
       </div>
