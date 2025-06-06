@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import wyniki from './wyniki.json';
+import resultsJson from './wyniki.json';
 import './ElectionCalculator.css';
 
 const ElectionCalculator = () => {
@@ -11,22 +11,21 @@ const ElectionCalculator = () => {
 
   const calculateResults = (percentage, count) => {
     const outputDict = {};
-    const pierwsza_tura_dict = wyniki.pierwsza_tura;
-    const druga_tura_dict = wyniki.druga_tura;
-    const kandydat = selectedCandidate;
+    const firstRound = resultsJson.pierwsza_tura;
+    const secondRound = resultsJson.druga_tura;
     const perc = Number(percentage) || 0;
     const cnt = Number(count) || 0;
 
-    for (const okreg in pierwsza_tura_dict) {
-      const p_kandydaci = pierwsza_tura_dict[okreg];
-      const d_kandydaci = druga_tura_dict[okreg];
-      const roznica_procenty = d_kandydaci[kandydat].procenty - p_kandydaci[kandydat].procenty;
-      const roznica_liczba = d_kandydaci[kandydat].liczba - p_kandydaci[kandydat].liczba;
+    for (const constituency in firstRound) {
+      const firstRoundCandidateResults = firstRound[constituency];
+      const secondRoundCandidateResults = secondRound[constituency];
+      const diffPercentages = secondRoundCandidateResults[selectedCandidate].procenty - firstRoundCandidateResults[selectedCandidate].procenty;
+      const diffNumbers = secondRoundCandidateResults[selectedCandidate].liczba - firstRoundCandidateResults[selectedCandidate].liczba;
 
-      if (roznica_procenty > perc && roznica_liczba > cnt) {
-        outputDict[okreg] = {
-          procenty: roznica_procenty,
-          liczba: roznica_liczba,
+      if (diffPercentages > perc && diffNumbers > cnt) {
+        outputDict[constituency] = {
+          percentage: diffPercentages,
+          count: diffNumbers,
         };
       }
     }
@@ -114,12 +113,12 @@ const ElectionCalculator = () => {
           <p>Łączna różnica w <b>głosach na korzyść kandydata</b>: {results.total.toFixed(1)}</p>
           <div className="districts">
             {Object.entries(results.districts)
-              .sort(([, a], [, b]) => sortBy === 'percentage' ? b.procenty - a.procenty : b.liczba - a.liczba)
+              .sort(([, a], [, b]) => sortBy === 'percentage' ? b.percentage - a.percentage : b.count - a.count)
               .map(([district, data]) => (
               <div key={district} className="district">
                 <h3>Nr komisji: {district}</h3>
-                <p>Różnica procentowa: {data.procenty.toFixed(2)}%</p>
-                <p>Różnica w głosach: {data.liczba.toFixed(1)}</p>
+                <p>Różnica procentowa: {data.percentage.toFixed(2)}%</p>
+                <p>Różnica w głosach: {data.count.toFixed(1)}</p>
               </div>
             ))}
           </div>
