@@ -40,83 +40,91 @@ const ElectionCalculator = () => {
 
   return (
     <div className="election-calculator">
-      <p className="description">
-        Kalkulator ma na celu pokazanie komisji wyborczych, w których głosy z pierwszych tur odbiegają od głosów z drugich tur.
-      </p>
-      <div className="candidates">
-        <div 
-          className={`candidate ${selectedCandidate === 'trzaskowski' ? 'selected' : ''}`}
-          onClick={() => setSelectedCandidate('trzaskowski')}
-        >
-          <img src={process.env.PUBLIC_URL + '/trzaskowski.jpg'} alt="Rafał Trzaskowski" />
-          <h3>Rafał Trzaskowski</h3>
-        </div>
-        <div 
-          className={`candidate ${selectedCandidate === 'nawrocki' ? 'selected' : ''}`}
-          onClick={() => setSelectedCandidate('nawrocki')}
-        >
-          <img src={process.env.PUBLIC_URL + '/nawrocki.webp'} alt="Karol Nawrocki" />
-          <h3>Karol Nawrocki</h3>
-        </div>
-      </div>
-
-      <div className="inputs">
-        <div className="input-group">
-          <label htmlFor="percentage">Minimalna różnica procentowa:</label>
-          <input
-            type="number"
-            id="percentage"
-            value={percentage}
-            onChange={(e) => setPercentage(Number(e.target.value))}
-            min="0"
-            max="100"
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="count">Minimalna różnica w liczbie głosów:</label>
-          <input
-            type="number"
-            id="count"
-            value={count}
-            onChange={(e) => setCount(Number(e.target.value))}
-            min="0"
-          />
-        </div>
-        <div className="input-group sort-switch">
-          <label>Sortuj wyniki:</label>
-          <button
-            type="button"
-            className={sortBy === 'percentage' ? 'active' : ''}
-            onClick={() => setSortBy('percentage')}
+      <div className="election-calculator">
+        <p className="description">
+          Kalkulator ma na celu pokazanie komisji wyborczych, w których głosy z pierwszych tur odbiegają od głosów z drugich tur.
+        </p>
+        <div className="candidates">
+          <div 
+            className={`candidate ${selectedCandidate === 'trzaskowski' ? 'selected' : ''}`}
+            onClick={() => setSelectedCandidate('trzaskowski')}
           >
-            %
-          </button>
-          <button
-            type="button"
-            className={sortBy === 'count' ? 'active' : ''}
-            onClick={() => setSortBy('count')}
+            <img src={process.env.PUBLIC_URL + '/trzaskowski.jpg'} alt="Rafał Trzaskowski" />
+            <h3>Rafał Trzaskowski</h3>
+          </div>
+          <div 
+            className={`candidate ${selectedCandidate === 'nawrocki' ? 'selected' : ''}`}
+            onClick={() => setSelectedCandidate('nawrocki')}
           >
-            głosy
-          </button>
+            <img src={process.env.PUBLIC_URL + '/nawrocki.webp'} alt="Karol Nawrocki" />
+            <h3>Karol Nawrocki</h3>
+          </div>
         </div>
-      </div>
 
-      <div className="results">
-        <h2>Różnica w poparciu między pierwszą a drugą turą</h2>
-        <div className="disclaimer">
-          <p><strong>Uwaga:</strong> Obliczenia uwzględniają głosy z pierwszej tury, które zostały rozdzielone między dwóch kandydatów w drugiej turze na podstawie sondaży. Stąd widać liczby niecałkowite.</p>
+        <div className="inputs">
+          <div className="input-group">
+            <label htmlFor="percentage">Minimalna różnica procentowa:</label>
+            <input
+              type="number"
+              id="percentage"
+              value={percentage}
+              onChange={(e) => setPercentage(Number(e.target.value))}
+              min="0"
+              max="100"
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="count">Minimalna różnica w liczbie głosów:</label>
+            <input
+              type="number"
+              id="count"
+              value={count}
+              onChange={(e) => setCount(Number(e.target.value))}
+              min="0"
+            />
+          </div>
+          <div className="input-group sort-switch">
+            <label>Sortuj wyniki:</label>
+            <button
+              type="button"
+              className={sortBy === 'percentage' ? 'active' : ''}
+              onClick={() => setSortBy('percentage')}
+            >
+              %
+            </button>
+            <button
+              type="button"
+              className={sortBy === 'count' ? 'active' : ''}
+              onClick={() => setSortBy('count')}
+            >
+              głosy
+            </button>
+          </div>
         </div>
-        <p>Łączna różnica w głosach: {results.total.toFixed(1)}</p>
-        <div className="districts">
-          {Object.entries(results.districts)
-            .sort(([, a], [, b]) => sortBy === 'percentage' ? b.procenty - a.procenty : b.liczba - a.liczba)
-            .map(([district, data]) => (
-            <div key={district} className="district">
-              <h3>Nr komisji: {district}</h3>
-              <p>Różnica procentowa: {data.procenty.toFixed(2)}%</p>
-              <p>Różnica w głosach: {data.liczba.toFixed(1)}</p>
-            </div>
-          ))}
+
+        <div className="results">
+          <h2>Różnica w poparciu między pierwszą a drugą turą</h2>
+          <div className="disclaimer">
+            <p><strong>Uwaga:</strong> Obliczenia uwzględniają głosy z pierwszej tury, które zostały rozdzielone między dwóch kandydatów w drugiej turze na podstawie sondaży. Stąd widać liczby niecałkowite.</p>
+          </div>
+          <p>Łączna różnica w głosach: {results.total.toFixed(1)}</p>
+          <div className="districts">
+            {Object.entries(results.districts)
+              .sort(([, a], [, b]) => sortBy === 'percentage' ? b.procenty - a.procenty : b.liczba - a.liczba)
+              .map(([district, data]) => (
+              <div key={district} className="district">
+                <h3>Nr komisji: {district}</h3>
+                <p>Różnica procentowa: {data.procenty.toFixed(2)}%</p>
+                <p>Różnica w głosach: {data.liczba.toFixed(1)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{marginTop: '2em', textAlign: 'center'}}>
+          <a href="https://github.com/radekwielonski/wybory2025/blob/main/HOW_I_MADE_INPUT_FILE.md" target="_blank" rel="noopener noreferrer">
+            Jak powstał plik wejściowy? (pełny opis)
+          </a>
         </div>
       </div>
     </div>
